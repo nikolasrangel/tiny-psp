@@ -4,27 +4,20 @@ implementação de um Payment Service Provider (PSP) para o [desafio técnico da
 
 ## índice
 
-- [introdução](#📄introdução)
-- [tecnologias utilizadas](#💽tecnologias-utilizadas)
-- [requisitos](#⚠️requisitos)
-- [instalação](#💻instalação)
+- [introdução](#introdução)
+- [tecnologias utilizadas](#tecnologias-utilizadas)
+- [requisitos](#requisitos)
+- [instalação](#instalação)
 	- [copiando o projeto](#copiando-o-projeto)
   - [subindo o servidor](#subindo-o-servidor)
-- [Data Flow](#data-flow)
-	- [Server](#server)
-		- [1. POST /boletos](#post-boletos)
-			- [a) Provider **could** process the boleto](#a-provider-could-process-the-boleto)
-			- [b) Provider **could not** process the boleto](#b-provider-could-not-process-the-boleto)
-		- [2. GET /boletos](#get-boletos)
-		- [3. GET /boletos/:id](#get-boletosid)
-	- [Worker](#worker)
-		- [1. Process `boletos-to-register` queue](#process-boletos-to-register-queue)
+- [endpoints](#endpoints)
+- [todo](#to-do)
 
-## 📄introdução
+## introdução
 
 este projeto destina-se a implementação de um PSP muito simples, cujas responsabilidades são: processar transações, retornar transações criadas, criação de pagáveis e retornar saldo.
 
-## 💽tecnologias utilizadas
+## tecnologias utilizadas
 
 a stack de tecnologia no projeto foi a seguinte:
 
@@ -36,13 +29,13 @@ a stack de tecnologia no projeto foi a seguinte:
 - **[Pagar.me JavaScript Style Guide](https://github.com/pagarme/javascript-style-guide)** plugin para o **[ESLint](https://eslint.org/)** como linting;
 
 
-## ⚠️requisitos
+## requisitos
 
 assegura-se que os seguintes softwares estejam instalados em sua máquina para a correta execução do projeto:
 - [Docker](https://docs.docker.com/);
 - [Docker Compose](https://docs.docker.com/compose/).
 
-## 💻instalação
+## instalação
 
 a seguir, instruções para a execução do projeto:
 
@@ -50,7 +43,7 @@ a seguir, instruções para a execução do projeto:
 
 1. **clone o repositório:**
   ```sh
-  $ git clone git@github.com:nikolasrangel/tiny-psp
+  $ git clone https://github.com/nikolasrangel/tiny-psp.git
   ```
 
 2. **faça o build da imagem base:**
@@ -60,7 +53,7 @@ a seguir, instruções para a execução do projeto:
 
 ### subindo o servidor
 
-antes de subir o servidor, é necessário subir o banco Postgres, executar suas migrações e seus seeds.
+antes de subir o servidor, é necessário subir o banco Postgres e executar suas migrações/seeds e também o Redis.
 
 vamos lá:
 
@@ -69,12 +62,17 @@ vamos lá:
 $ make setup-postgres-db
 ```
 
-2. **por fim, suba o servidor HTTP:**
+2. **subindo o redis:**
+```sh
+$ make start-redis
+```
+
+3. **por fim, suba o servidor HTTP:**
 ```sh
 $ make server
 ```
 
-## Endpoints
+## endpoints
 
 esta seção tem como objetivo explicitar cada endpoint do projeto
 
@@ -219,3 +217,8 @@ ao realizar requisição em uma rota não definida, a API retornará um JSON com
       }
   }
   ```
+
+## to-do
+1. criar testes unitários e/ou de integração;
+2. criar worker com rotina diária para verificar transações com status 'waiting_funds';
+3. monitorar API e melhorar error handling.
