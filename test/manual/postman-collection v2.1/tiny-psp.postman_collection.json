@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "73b5b448-b97a-4490-884d-8be205a3f9fb",
+		"name": "tiny psp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST: nova transacao - 200",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 9999,\n\t\"description\": \"Calça que vira bermuda\",\n\t\"payment_method\": \"debit_card\",\n\t\"card_number\": \"5197364440676122\",\n\t\"card_holder_name\": \"NIKaOLAS J R SOUZA\",\n\t\"card_expiration_date\": \"0120\",\n\t\"card_cvv\": \"323\",\n\t\"api_key\": \"ji919n9sahsak\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST: nova transacao - bandeira nao aceita - 400",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 9999,\n\t\"description\": \"Calça que vira bermuda\",\n\t\"payment_method\": \"credit_card\",\n\t\"card_number\": \"377649575336119\",\n\t\"card_holder_name\": \"NIKOLAS J R SOUZA\",\n\t\"card_expiration_date\": \"0120\",\n\t\"card_cvv\": \"323\",\n\t\"api_key\": \"ji919n9sahsak\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST: nova transacao - tipo de pagamento nao aceito - 400",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 9999,\n\t\"description\": \"Calça que vira bermuda\",\n\t\"payment_method\": \"boleto\",\n\t\"card_number\": \"5197364440676122\",\n\t\"card_holder_name\": \"NIKOLAS J R SOUZA\",\n\t\"card_expiration_date\": \"0120\",\n\t\"card_cvv\": \"323\",\n\t\"api_key\": \"ji919n9sahsak\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST: nova transacao - cartao invalido - 400",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 9999,\n\t\"description\": \"Calça que vira bermuda\",\n\t\"payment_method\": \"credit_card\",\n\t\"card_number\": \"11111164440676122\",\n\t\"card_holder_name\": \"NIKOLAS J R SOUZA\",\n\t\"card_expiration_date\": \"0120\",\n\t\"card_cvv\": \"323\",\n\t\"api_key\": \"ji919n9sahsak\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET: obtem todas transacoes - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET: recurso inexistente - 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/recurso_nao_existente",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"recurso_nao_existente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET: obtem saldo - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/balance?api_key=ji919n9sahsak",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "ji919n9sahsak"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
