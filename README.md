@@ -11,7 +11,7 @@ implementação de um Payment Service Provider (PSP) para o [desafio técnico da
 	- [copiando o projeto](#copiando-o-projeto)
   - [subindo o servidor](#subindo-o-servidor)
 - [endpoints](#endpoints)
-- [todo](#to-do)
+- [to-do](#to-do)
 
 ## introdução
 
@@ -21,8 +21,8 @@ este projeto destina-se a implementação de um PSP muito simples, cujas respons
 
 a stack de tecnologia no projeto foi a seguinte:
 
-- **[Docker](https://docs.docker.com)** e **[Docker Compose](https://docs.docker.com/compose/)** para a criação do ambiente de desenvolviment;
-- **[Express](https://github.com/expressjs/express)** para a criação da API REST;
+- **[Docker](https://docs.docker.com)** e **[Docker Compose](https://docs.docker.com/compose/)** para a criação do ambiente de desenvolvimento;
+- **[Express](https://github.com/expressjs/express)** utilizado para a criação do servidor web da API REST;
 - **[PostgreSQL](https://www.postgresql.org)** como banco de dados relacional e **[Sequelize](http://docs.sequelizejs.com)** como ORM (object relational mapper);
 - **[Redis](https://redis.io/)** para armazenamento de dados em memória;
 - **[Escriba](https://github.com/pagarme/escriba)** como middleware para o Express para o log das requisições HTTP;
@@ -31,13 +31,13 @@ a stack de tecnologia no projeto foi a seguinte:
 
 ## requisitos
 
-assegura-se que os seguintes softwares estejam instalados em sua máquina para a correta execução do projeto:
+certifique-se que os seguintes softwares estejam instalados em sua máquina para a correta execução do projeto:
 - [Docker](https://docs.docker.com/);
 - [Docker Compose](https://docs.docker.com/compose/).
 
 ## instalação
 
-a seguir, instruções para a execução do projeto:
+a seguir, instruções para a instalação e execução do projeto:
 
 ### copiando o projeto
 
@@ -46,9 +46,9 @@ a seguir, instruções para a execução do projeto:
   $ git clone https://github.com/nikolasrangel/tiny-psp.git
   ```
 
-2. **crie o arquivo .env na raiz do projeto:**
+2. **criação do arquivo .env:**
 
-crie um arquivo `.env` com as mesmas variáveis do `.env.example`
+crie um arquivo `.env` na raiz do projeto com as mesmas variáveis do `.env.example`
 
 3. **faça o build da imagem base:**
   ```sh
@@ -57,28 +57,28 @@ crie um arquivo `.env` com as mesmas variáveis do `.env.example`
 
 ### subindo o servidor
 
-antes de subir o servidor, é necessário subir o banco Postgres e executar suas migrações/seeds e também o Redis.
+antes de subir nosso servidor web, é necessário subir previamente o banco Postgres (e executar suas migrações/seeds) e o Redis.
 
 vamos lá:
 
-1. **subindo banco Postgres, realizando migrações e seeds:**
+1. **subindo banco Postgres, realizando as migrações e seed:**
 ```sh
 $ make setup-postgres-db
 ```
 
-2. **subindo o redis:**
+2. **subindo o Redis:**
 ```sh
 $ make start-redis
 ```
 
-3. **por fim, suba o servidor HTTP:**
+3. **por fim, subindo o servidor HTTP na porta default (3000):**
 ```sh
 $ make server
 ```
 
 ## endpoints
 
-esta seção tem como objetivo explicitar cada endpoint do projeto
+esta seção tem como objetivo explicitar cada endpoint do projeto.
 
 ### 1. POST /api/v1/transaction
 
@@ -128,7 +128,7 @@ criação de uma nova transação
 
 ### 2. GET /api/v1/transactions
 
-obter uma lista das transações já criadas
+obtendo uma lista das transações já criadas
 
 **exemplo:**
 
@@ -144,7 +144,7 @@ obter uma lista das transações já criadas
   [
     {
         "id": 1,
-        "api_key": "nikolas",
+        "api_key": "ji919n9sahsak",
         "amount": 2000,
         "card_holder_name": "NIKOLAS J R SOUZA",
         "card_expiration_date": "0520",
@@ -158,7 +158,7 @@ obter uma lista das transações já criadas
     },
     {
         "id": 2,
-        "api_key": "nikolas",
+        "api_key": "ji919n9sahsak",
         "amount": 2000,
         "card_holder_name": "NIKOLAS J R SOUZA",
         "card_expiration_date": "0520",
@@ -175,8 +175,9 @@ obter uma lista das transações já criadas
 
 ### 3. GET /api/v1/balance
 
-obter o saldo `available` e `waiting_funds` para um cliente com determinada `api_key`
-passar junto a requisição a query string `api_key`
+obtendo o saldo `available` e `waiting_funds` para o cliente com determinada `api_key`
+
+**obrigatório:** requisição deve conter query string `api_key`
 
 **exemplo:**
 
@@ -202,7 +203,7 @@ passar junto a requisição a query string `api_key`
 
 ### 4. requisição a endpoint inexistente
 
-ao realizar requisição em uma rota não definida, a API retornará um JSON com mensagem de erro e um código HTTP específico
+ao realizar requisição em uma rota não definida, a API retornará um JSON com mensagem de erro e código HTTP específico (404)
 
 **exemplo**
 
@@ -222,7 +223,23 @@ ao realizar requisição em uma rota não definida, a API retornará um JSON com
   }
   ```
 
+## utilizando
+
+após subir o servidor web, ele estará disponível na porta 3000. assim, tem-se as seguintes opções para a realização das requisições HTTP
+para teste e validação dos endpoints:
+
+1. **utilizando cURL**:
+
+comandos cURL disponíveis no seguinte caminho: `src/test/manual/curl`
+
+2. **utilizando o [Postman](https://www.getpostman.com/)**:
+
+coleção das requisições no caminho: `src/test/manual/postman-collection v2.1`
+
+
+**obs:** em `src/test/data` tem-se também exemplos de demais dados para transações e cartões de crédito válidos e inválidos
+
 ## to-do
-1. criar testes unitários e/ou de integração;
-2. criar worker com rotina diária para verificar transações com status 'waiting_funds';
-3. monitorar API e melhorar error handling.
+1. criar **testes** unitários e/ou de integração;
+2. criar **worker** com rotina diária para verificar transações com status 'waiting_funds';
+3. **monitorar** API e melhorar **error handling**.
