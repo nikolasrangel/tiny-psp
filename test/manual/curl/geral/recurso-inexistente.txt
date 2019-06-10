@@ -1,0 +1,3 @@
+- Requisicao a recurso inexistente:
+
+curl -X GET 'localhost:3000/api/v1/recurso_nao_existente'

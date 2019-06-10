@@ -1,0 +1,44 @@
+1. Bandeira nao aceita (American Express):
+
+curl -X POST 'localhost:3000/api/v1/transaction' -H \
+'content-type: application/json' -d \
+'{
+	"amount": 9999,
+	"description": "Calça que vira bermuda",
+	"payment_method": "credit_card",
+	"card_number": "377649575336119",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}'
+
+2. Tipo de pagamento nao aceito:
+
+curl -X POST 'localhost:3000/api/v1/transaction' -H \
+'content-type: application/json' -d \
+'{
+	"amount": 9999,
+	"description": "Calça que vira bermuda",
+	"payment_method": "boleto",
+	"card_number": "5197364440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}'
+
+3. Cartao de credito invalido:
+
+curl -X POST 'localhost:3000/api/v1/transaction' -H \
+'content-type: application/json' -d \
+'{
+	"amount": 9999,
+	"description": "Calça que vira bermuda",
+	"payment_method": "credit_card",
+	"card_number": "11111164440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}'
