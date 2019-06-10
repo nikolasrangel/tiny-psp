@@ -1,0 +1,43 @@
+{
+	"amount": 10000,
+	"description": "Livro de Receitas da Palmirinha",
+	"payment_method": "credit_card",
+	"card_number": "5197364440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}
+
+{
+	"amount": 20000,
+	"description": "Liquidificador da Palmirinha",
+	"payment_method": "credit_card",
+	"card_number": "5197364440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}
+
+{
+	"amount": 8000,
+	"description": "Camiseta",
+	"payment_method": "debit_card",
+	"card_number": "5197364440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}
+
+{
+	"amount": 15000,
+	"description": "Calça que vira bermuda",
+	"payment_method": "debit_card",
+	"card_number": "5197364440676122",
+	"card_holder_name": "NIKOLAS J R SOUZA",
+	"card_expiration_date": "0120",
+	"card_cvv": "323",
+	"api_key": "ji919n9sahsak"
+}
