@@ -3,10 +3,11 @@ const commomQueries = require('../repositories/general')
 
 const getFeeValueBasedOnPaymentType = type => commomQueries.findFeeValue(type)
 
-const calculateFeeAmount = (amount, feePercentage) => R.multiply(
-  amount,
-  feePercentage
-)
+const calculateFeeAmount = (amount, feePercentage) => {
+  const feeAmount = R.multiply(amount, feePercentage)
+
+  return parseInt(feeAmount, 10)
+}
 
 const getFeeAmount = async (amount, paymentType) => {
   const feePercentage = await getFeeValueBasedOnPaymentType(paymentType)
