@@ -46,7 +46,11 @@ a seguir, instruções para a execução do projeto:
   $ git clone https://github.com/nikolasrangel/tiny-psp.git
   ```
 
-2. **faça o build da imagem base:**
+2. **crie o arquivo .env na raiz do projeto:**
+
+crie um arquivo `.env` com as mesmas variáveis do `.env.example`
+
+3. **faça o build da imagem base:**
   ```sh
   $ docker-compose build server
   ```
